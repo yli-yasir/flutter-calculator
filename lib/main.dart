@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'key_pad.dart';
+import 'keyboard.dart';
 
 void main() {
   runApp(Calculator());
@@ -38,6 +38,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final buttons = <Widget>[
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Hello'))),
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
+    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
+    Flexible(
+        flex: 2,
+        fit: FlexFit.tight,
+        child: OutlineButton(child: Text('Helloi2')))
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -62,7 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     flex: 1,
                     fit: FlexFit.tight,
                     child: Container(color: Colors.black)),
-                Flexible(flex: 2, fit: FlexFit.tight, child: KeyPad())
+                Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Keyboard(columnCount: 4, buttons: buttons))
               ],
             )));
   }
