@@ -8,10 +8,10 @@ class Keyboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> flexibleRows = _makeRows();
+    final List<Widget> populatedRows = _makeRows();
 
     return Column(
-      children: flexibleRows,
+      children: populatedRows,
     );
   }
 
@@ -22,8 +22,7 @@ class Keyboard extends StatelessWidget {
     for (int i = 0; i < rowCount; i++) {
       final rowChildren =
           buttons.skip(i * columnCount).take(columnCount).toList();
-      flexibleRows.add(Flexible(
-          fit: FlexFit.tight,
+      flexibleRows.add(Expanded(
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: rowChildren)));

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'keyboard.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(Calculator());
@@ -29,57 +29,5 @@ class Calculator extends StatelessWidget {
       ),
       home: HomeScreen(),
     );
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final buttons = <Widget>[
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Hello'))),
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
-    Flexible(fit: FlexFit.tight, child: OutlineButton(child: Text('Helloi'))),
-    Flexible(
-        flex: 2,
-        fit: FlexFit.tight,
-        child: OutlineButton(child: Text('Helloi2')))
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: const Text('Live Calculator'),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.info),
-                  onPressed: () {},
-                ),
-                // action button
-                IconButton(
-                  icon: Icon(Icons.color_lens),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            body: Column(
-              children: <Widget>[
-                Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Container(color: Colors.black)),
-                Flexible(
-                    flex: 2,
-                    fit: FlexFit.tight,
-                    child: Keyboard(columnCount: 4, buttons: buttons))
-              ],
-            )));
   }
 }
