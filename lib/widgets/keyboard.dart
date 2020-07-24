@@ -30,3 +30,16 @@ class Keyboard extends StatelessWidget {
     return flexibleRows;
   }
 }
+
+class KeyboardButton extends StatelessWidget {
+  final String text;
+  final onPressed;
+  KeyboardButton({this.text, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) => Expanded(
+          child: OutlineButton(
+        child: Text(text),
+        onPressed: onPressed,
+      ));
+}
