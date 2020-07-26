@@ -21,7 +21,11 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  math_expressions: ^2.0.0
   provider: ^4.3.1
+  auto_size_text: ^2.1.0
+  shimmer: ^1.1.1
+
   flutter:
     sdk: flutter
 
@@ -44,6 +48,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Audiowide
+      fonts:
+        - asset: lib/fonts/audiowide.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

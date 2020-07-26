@@ -39,7 +39,11 @@ class KeyboardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Expanded(
           child: OutlineButton(
-        child: Text(text),
+        color: Theme.of(context).cursorColor,
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 32),
+        ),
         onPressed: onPressed,
       ));
 }
