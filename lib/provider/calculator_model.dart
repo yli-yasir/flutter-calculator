@@ -63,19 +63,26 @@ String lastChar(String string) {
 class CalculatorModel extends ChangeNotifier {
   String screenText = '';
   int _unclosedParenthesisCount = 0;
+  bool hasFoundResult = false;
 
+  //Notifier function
   void clear() {
     screenText = '';
     _unclosedParenthesisCount = 0;
     notifyListeners();
   }
 
+  // Notifier function
   void findResult() {
-    closeUnclosedParenthesis();
+    if (hasUnclosedParenthesis()) {
+      return;
+    }
     final mathExp = Parser().parse(screenTextToMathExpString());
 
     screenText =
         mathExp.evaluate(EvaluationType.REAL, ContextModel()).toString();
+    hasFoundResult = true;
+    notifyListeners();
   }
 
   String screenTextToMathExpString() {
@@ -98,6 +105,10 @@ class CalculatorModel extends ChangeNotifier {
 
   // --- Notifier function ---
   void appendNum(int num) {
+    if (hasFoundResult) {
+      hasFoundResult = false;
+      clear();
+    }
     // Handle implicit multiplication
     if (screenTextLastChar == CLOSING_PARENTHESIS ||
         screenTextLastChar == PERCENT_SYMBOL) {
@@ -157,6 +168,9 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void _appendOperator(screenTextOperator) {
+    if (hasFoundResult) {
+      hasFoundResult = false;
+    }
     // An operator should not come after a decimal seperator or opening parenthesis
     // An operator should not come at the start of the expression
     if (screenTextLastChar == OPENING_PARENTHESIS ||
@@ -191,6 +205,9 @@ class CalculatorModel extends ChangeNotifier {
   // ---- Signs ----
   // Notifier function
   void inverseSign() {
+    if (hasFoundResult) {
+      hasFoundResult = false;
+    }
     //Find the index of the last operator
     final lastOperatorIndex = screenText.lastIndexOf(screenOperatorsRegex);
     //If there is no operator, then just add the sign at the start of the string
@@ -244,6 +261,9 @@ class CalculatorModel extends ChangeNotifier {
   // ---- Parenthesis -----
   // Notifier function
   void appendParenthesis() {
+    if (hasFoundResult) {
+      hasFoundResult = false;
+    }
     if (screenTextLastChar == DECIMAL_SEPERATOR_SYMBOL) {
       return;
     }
@@ -272,14 +292,6 @@ class CalculatorModel extends ChangeNotifier {
   void _appendClosingParenthesis() {
     screenText += CLOSING_PARENTHESIS;
     _unclosedParenthesisCount--;
-  }
-
-  // Notifier function
-  void closeUnclosedParenthesis() {
-    while (hasUnclosedParenthesis()) {
-      _appendClosingParenthesis();
-    }
-    notifyListeners();
   }
 
   bool hasUnclosedParenthesis() {
